@@ -12,6 +12,7 @@ from django.contrib.auth.decorators import login_required
 from .models import *
 from .forms import CreateUserForm
 
+@login_required(login_url='login')
 def home(request):
     return render(request, "home.html")
 
