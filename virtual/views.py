@@ -15,6 +15,12 @@ from .forms import CreateUserForm
 def home(request):
     return render(request, "home.html")
 
+def studentPage(request):
+    return render(request, "student.html")
+
+def lecturerPage(request):
+    return render(request, "lecturer.html")
+
 def registerPage(request):
 	if request.user.is_authenticated:
 		return redirect('home')
