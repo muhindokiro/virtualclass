@@ -5,23 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Font Awesome -->
-    <link
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    rel="stylesheet"
-    />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
     <!-- Google Fonts -->
-    <link
-    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-    rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <!-- MDB -->
-    <link
-    href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.0/mdb.min.css"
-    rel="stylesheet"
-    />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.0/mdb.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="">
     <title>Document</title>
 </head>
+
 <body>
     <!-- <h1>Hello world</h1> -->
     <!-- Navbar -->
@@ -41,158 +33,48 @@
       <i class="fas fa-bars"></i>
     </button>
 
-    <!-- Collapsible wrapper -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <!-- Navbar brand -->
+            <!-- Collapsible wrapper -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Navbar brand -->
 
-      <!-- Left links -->
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'home' %}">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'student' %}">Student</a>
-        </li>
-        
-      </ul>
-      <!-- Left links -->
-    </div>
-    <!-- Collapsible wrapper -->
+                <!-- Left links -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}">Home</a>
+                    </li>
+                    <li class=" nav-item ">
+                        <a class="nav-link " href="{% url 'student' %} ">Student</a>
+                    </li>
+                </ul>
+                <!-- Left links -->
+            </div>
+            <!-- Collapsible wrapper -->
 
-    <!-- Right elements -->
-    <div class="d-flex align-items-center">
+            <!-- Right elements -->
+            <div class="d-flex align-items-center ">
 
-      <!-- Avatar -->
-      <div class="dropdown">
-        <a
-          class="dropdown-toggle d-flex align-items-center hidden-arrow"
-          href="#"
-          id="navbarDropdownMenuAvatar"
-          role="button"
-          data-mdb-toggle="dropdown"
-          aria-expanded="false"
-        >
+                <!-- Avatar -->
+                <div class="dropdown ">
+                    <a class="dropdown-toggle d-flex align-items-center hidden-arrow " href="# " id="navbarDropdownMenuAvatar " role="button " data-mdb-toggle="dropdown " aria-expanded="false ">
 
-          <i class="fas fa-user-alt"></i>
-        </a>
-        <ul
-          class="dropdown-menu dropdown-menu-end"
-          aria-labelledby="navbarDropdownMenuAvatar"
-        >
-          <li>
-            <a class="dropdown-item" href="#">My profile</a>
-          </li>
-          <li>
-            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <!-- Right elements -->
-  </div>
-  <!-- Container wrapper -->
-</nav>
-<!-- Navbar -->
+                        <i class="fas fa-user-alt "></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end " aria-labelledby="navbarDropdownMenuAvatar ">
+
+                        <li>
+                            <a class="dropdown-item " href="{% url 'logout' %} ">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Right elements -->
+        </div>
+        <!-- Container wrapper -->
+    </nav>
+    <!-- Navbar -->
 
 
-<br/>
-<section class="ftco-section">
-		<div class="container">
-			
-			<div class="row">
-				<div class="col-md-12">
-					<h4 class="text-center mb-4">Virtual Class Table</h4>
-					<div class="table-wrap">
-						<table class="table table-bordered text-center">
-              <thead>
-                <tr>
-                  <th>Monday</th>
-                  <th>Tuesday</th>
-                  <th>Wednesday</th>
-                  <th>Thursday</th>
-                  <th>Friday</th>
-                  
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><i class="fa fa-close"></i></td>
-                  <td class="text-center"><div class="img rounded-circle mb-2" style="background-image: url(images/classes-1.jpg);"></div>
-                    <p href="#"><strong>Ecological Economics</strong> <br>
-                    9am - 11am <br> Mr. Lencho Hadizatu</p>
-                  </td>
-                  <td><i class="fa fa-close"></i></td>
-                  <td class="text-center"><div class="img rounded-circle mb-2" style="background-image: url(images/classes-2.jpg);"></div>
-                    <p href="#"><strong>Philosophy of Language</strong> <br>
-                    9am - 11am <br> Mrs. Halimatu Zainabu</p>
-                  </td>
-                  <td><i class="fa fa-close"></i></td>
-                  
-                </tr>
-                <tr>
-                  <td class="text-center"><div class="img rounded-circle mb-2" style="background-image: url(images/classes-4.jpg);"></div>
-                    <p href="#"><strong>Cloud Computing</strong> <br>
-                    11am - 1pm <br> Mr. Masego Aboubacar</p>
-                  </td>
-                  <td><i class="fa fa-close"></i></td>
-                  <td class="text-center"><div class="img rounded-circle mb-2" style="background-image: url(images/classes-5.jpg);"></div>
-                    <p href="#"><strong>Cloud Computing</strong> <br>
-                    11am - 1pm <br> Mr. Masego Aboubacar</p>
-                  </td>
-                  <td><i class="fa fa-close"></i></td>
-                  <td class="text-center"><div class="img rounded-circle mb-2" style="background-image: url(images/classes-6.jpg);"></div>
-                    <p href="#"><strong>Ecological Economics</strong> <br>
-                    11am - 1pm <br> Mr. Lencho Hadizatu</p>
-                  </td>
-                  
-                </tr>
-                <tr>
-                  <td><i class="fa fa-close"></i></td>
-                  <td class="text-center"><div class="img rounded-circle mb-2" style="background-image: url(images/classes-1.jpg);"></div>
-                    <p href="#"><strong>Behavioural Economics</strong> <br>
-                    1pm - 3pm <br> Mrs. Muthoni Ola</p>
-                  </td>
-                  <td><i class="fa fa-close"></i></td>
-                  <td class="text-center"><div class="img rounded-circle mb-2" style="background-image: url(images/classes-2.jpg);"></div>
-                    <p href="#"><strong>Computational Mathematics</strong> <br>
-                    1pm - 3pm <br> Mrs. Philomena Okeke</p>
-                  </td>
-                  <td><i class="fa fa-close"></i></td>
-                  
-                </tr>
-                <tr>
-                  <td class="text-center"><div class="img rounded-circle mb-2" style="background-image: url(images/classes-4.jpg);"></div>
-                    <p href="#"><strong>History of Computer Hardware</strong> <br>
-                    3pm - 5pm <br> Mr. Mwangi Grant</p>
-                  </td>
-                  <td><i class="fa fa-close"></i></td>
-                  <td class="text-center"><div class="img rounded-circle mb-2" style="background-image: url(images/classes-5.jpg);"></div>
-                    <p href="#"><strong>Ecological Economics</strong> <br>
-                    3pm - 5pm <br> Mr. Lencho Hadizatu</p>
-                  </td>
-                  <td><i class="fa fa-close"></i></td>
-                  <td class="text-center"><div class="img rounded-circle mb-2" style="background-image: url(images/classes-6.jpg);"></div>
-                    <p href="#"><strong>Computational Linguistics</strong> <br>
-                    3pm - 5pm <br> Mrs. Joann Shantelle</p>
-                  </td>
-                  
-                </tr>
-                <tr>
-                  <td class="text-center"><div class="img rounded-circle mb-2" style="background-image: url(images/classes-1.jpg);"></div>
-                    <p href="#"><strong>Computational Mathematics</strong> <br>
-                    5pm - 7pm <br> Mrs. Philomena Okeke</p>
-                  </td>
-                  <td><i class="fa fa-close"></i></td>
-                  <td class="text-center"><div class="img rounded-circle mb-2" style="background-image: url(images/classes-2.jpg);"></div>
-                    <p href="#"><strong>Computational Linguistics</strong> <br>
-                    5pm - 7pm <br> Mrs. Joann Shantelle</p>
-                  </td>
-
-                  <td><i class="fa fa-close"></i></td>
-                  <td class="text-center"><div class="img rounded-circle mb-2" style="background-image: url(images/classes-4.jpg);"></div>
-                    <p href="#"><strong>Behavioural Economics</strong> <br>
-                    5pm - 7pm <br> Mrs. Muthoni Ola</p>
-                  </td>
+    <!-- <br/> -->
 
                 </tr>
               </tbody>
@@ -217,19 +99,17 @@
   <!-- Footer -->
   <footer class="text-center text-white fixed-bottom" style="background-color: #4A6E64">
 
-    <!-- Copyright -->
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-      © 2022 Copyright:
-      <a class="text-white" href="https://mdbootstrap.com/">Virtual Class</a>
-    </div>
-    <!-- Copyright -->
-  </footer>
-  <!-- Footer -->
-</section>
+            <!-- Copyright -->
+            <div class="text-center p-3 " style="background-color: rgba(0, 0, 0, 0.2); ">
+                © 2022 Copyright:
+                <a class="text-white " href="https://mdbootstrap.com/ ">Virtual Class</a>
+            </div>
+            <!-- Copyright -->
+        </footer>
+        <!-- Footer -->
+    </section>
 </body>
-    <!-- MDB -->
-    <script
-    type="text/javascript"
-    src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.0/mdb.min.js"
-    ></script>
+<!-- MDB -->
+<script type="text/javascript " src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.0/mdb.min.js "></script>
+
 </html>
