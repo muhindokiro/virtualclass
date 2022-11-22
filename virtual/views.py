@@ -12,13 +12,15 @@ from django.contrib.auth.decorators import login_required
 from .models import *
 from .forms import CreateUserForm
 
-@login_required(login_url='login')
+
 def home(request):
     return render(request, "home.html")
 
+@login_required(login_url='login')
 def studentPage(request):
     return render(request, "student.html")
 
+@login_required(login_url='login')
 def lecturerPage(request):
     return render(request, "lecturer.html")
 
@@ -55,7 +57,7 @@ def loginPage(request):
 				return redirect('home')
 			else:
 				messages.info(request, 'Username or Password is incorrect')
-
+   
 		context = {}
 		return render(request, 'login.html', context)
 
