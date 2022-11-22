@@ -61,20 +61,126 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end " aria-labelledby="navbarDropdownMenuAvatar ">
 
-                        <li>
-                            <a class="dropdown-item " href="{% url 'logout' %} ">Logout</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <!-- Right elements -->
-        </div>
-        <!-- Container wrapper -->
-    </nav>
-    <!-- Navbar -->
+          <i class="fas fa-user-alt"></i>
+        </a>
+        <ul
+          class="dropdown-menu dropdown-menu-end"
+          aria-labelledby="navbarDropdownMenuAvatar"
+        >
+          <li>
+            <a class="dropdown-item" href="#">My profile</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- Right elements -->
+  </div>
+  <!-- Container wrapper -->
+</nav>
+<!-- Navbar -->
 
 
-    <!-- <br/> -->
+<br/>
+<section class="ftco-section">
+		<div class="container">
+			
+			<div class="row">
+				<div class="col-md-12">
+					<h4 class="text-center mb-4">Virtual Class Table</h4>
+					<div class="table-wrap">
+						<table class="table table-bordered text-center">
+              <thead>
+                <tr>
+                  <th>Monday</th>
+                  <th>Tuesday</th>
+                  <th>Wednesday</th>
+                  <th>Thursday</th>
+                  <th>Friday</th>
+                  
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><i class="fa fa-close"></i></td>
+                  <td class="text-center"><div class="img rounded-circle mb-2" style="background-image: url(images/classes-1.jpg);"></div>
+                    <p href="#"><strong>Ecological Economics</strong> <br>
+                    9am - 11am <br> Mr. Lencho Hadizatu</p>
+                  </td>
+                  <td><i class="fa fa-close"></i></td>
+                  <td class="text-center"><div class="img rounded-circle mb-2" style="background-image: url(images/classes-2.jpg);"></div>
+                    <p href="#"><strong>Philosophy of Language</strong> <br>
+                    9am - 11am <br> Mrs. Halimatu Zainabu</p>
+                  </td>
+                  <td><i class="fa fa-close"></i></td>
+                  
+                </tr>
+                <tr>
+                  <td class="text-center"><div class="img rounded-circle mb-2" style="background-image: url(images/classes-4.jpg);"></div>
+                    <p href="#"><strong>Cloud Computing</strong> <br>
+                    11am - 1pm <br> Mr. Masego Aboubacar</p>
+                  </td>
+                  <td><i class="fa fa-close"></i></td>
+                  <td class="text-center"><div class="img rounded-circle mb-2" style="background-image: url(images/classes-5.jpg);"></div>
+                    <p href="#"><strong>Cloud Computing</strong> <br>
+                    11am - 1pm <br> Mr. Masego Aboubacar</p>
+                  </td>
+                  <td><i class="fa fa-close"></i></td>
+                  <td class="text-center"><div class="img rounded-circle mb-2" style="background-image: url(images/classes-6.jpg);"></div>
+                    <p href="#"><strong>Ecological Economics</strong> <br>
+                    11am - 1pm <br> Mr. Lencho Hadizatu</p>
+                  </td>
+                  
+                </tr>
+                <tr>
+                  <td><i class="fa fa-close"></i></td>
+                  <td class="text-center"><div class="img rounded-circle mb-2" style="background-image: url(images/classes-1.jpg);"></div>
+                    <p href="#"><strong>Behavioural Economics</strong> <br>
+                    1pm - 3pm <br> Mrs. Muthoni Ola</p>
+                  </td>
+                  <td><i class="fa fa-close"></i></td>
+                  <td class="text-center"><div class="img rounded-circle mb-2" style="background-image: url(images/classes-2.jpg);"></div>
+                    <p href="#"><strong>Computational Mathematics</strong> <br>
+                    1pm - 3pm <br> Mrs. Philomena Okeke</p>
+                  </td>
+                  <td><i class="fa fa-close"></i></td>
+                  
+                </tr>
+                <tr>
+                  <td class="text-center"><div class="img rounded-circle mb-2" style="background-image: url(images/classes-4.jpg);"></div>
+                    <p href="#"><strong>History of Computer Hardware</strong> <br>
+                    3pm - 5pm <br> Mr. Mwangi Grant</p>
+                  </td>
+                  <td><i class="fa fa-close"></i></td>
+                  <td class="text-center"><div class="img rounded-circle mb-2" style="background-image: url(images/classes-5.jpg);"></div>
+                    <p href="#"><strong>Ecological Economics</strong> <br>
+                    3pm - 5pm <br> Mr. Lencho Hadizatu</p>
+                  </td>
+                  <td><i class="fa fa-close"></i></td>
+                  <td class="text-center"><div class="img rounded-circle mb-2" style="background-image: url(images/classes-6.jpg);"></div>
+                    <p href="#"><strong>Computational Linguistics</strong> <br>
+                    3pm - 5pm <br> Mrs. Joann Shantelle</p>
+                  </td>
+                  
+                </tr>
+                <tr>
+                  <td class="text-center"><div class="img rounded-circle mb-2" style="background-image: url(images/classes-1.jpg);"></div>
+                    <p href="#"><strong>Computational Mathematics</strong> <br>
+                    5pm - 7pm <br> Mrs. Philomena Okeke</p>
+                  </td>
+                  <td><i class="fa fa-close"></i></td>
+                  <td class="text-center"><div class="img rounded-circle mb-2" style="background-image: url(images/classes-2.jpg);"></div>
+                    <p href="#"><strong>Computational Linguistics</strong> <br>
+                    5pm - 7pm <br> Mrs. Joann Shantelle</p>
+                  </td>
+
+                  <td><i class="fa fa-close"></i></td>
+                  <td class="text-center"><div class="img rounded-circle mb-2" style="background-image: url(images/classes-4.jpg);"></div>
+                    <p href="#"><strong>Behavioural Economics</strong> <br>
+                    5pm - 7pm <br> Mrs. Muthoni Ola</p>
+                  </td>
 
                 </tr>
               </tbody>
