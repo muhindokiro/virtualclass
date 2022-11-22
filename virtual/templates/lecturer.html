@@ -48,13 +48,13 @@
       <!-- Left links -->
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="#">Home</a>
+          <a class="nav-link" href="{% url 'home' %}">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Student</a>
+          <a class="nav-link" href="{% url 'student' %}">Student</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Lecturer</a>
+          <a class="nav-link" href="{% url 'lecturer' %}">Lecturer</a>
         </li>
       </ul>
       <!-- Left links -->
@@ -85,10 +85,7 @@
             <a class="dropdown-item" href="#">My profile</a>
           </li>
           <li>
-            <a class="dropdown-item" href="#">Settings</a>
-          </li>
-          <li>
-            <a class="dropdown-item" href="#">Logout</a>
+            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
           </li>
         </ul>
       </div>
@@ -100,8 +97,14 @@
 <!-- Navbar -->
 
 
-<!-- <br/> -->
-
+<br/>
+<br/>
+<br/>
+<form method="POST" class="post-form" enctype="multipart/form-data">  
+        {% csrf_token %}  
+        {{ form.as_p }}  
+        <button type="submit" class="save btn btn-default">Save</button>  
+</form>  
 
 
 <section class="">
