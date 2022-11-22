@@ -28,6 +28,7 @@
       <i class="fas fa-bars"></i>
     </button>
 
+<<<<<<< HEAD
             <!-- Collapsible wrapper -->
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Navbar brand -->
@@ -90,6 +91,79 @@
             </div>
         </div>
         <button class="carousel-control-prev" data-mdb-target="#carouselExampleInterval" type="button" data-mdb-slide="prev">
+=======
+    <!-- Collapsible wrapper -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- Navbar brand -->
+
+      <!-- Left links -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'home' %}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'student' %}">Student</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'lecturer' %}">Lecturer</a>
+        </li>
+      </ul>
+      <!-- Left links -->
+    </div>
+    <!-- Collapsible wrapper -->
+
+    <!-- Right elements -->
+    <div class="d-flex align-items-center">
+
+      <!-- Avatar -->
+      <div class="dropdown">
+        <a
+          class="dropdown-toggle d-flex align-items-center hidden-arrow"
+          href="#"
+          id="navbarDropdownMenuAvatar"
+          role="button"
+          data-mdb-toggle="dropdown"
+          aria-expanded="false"
+        >
+
+          <i class="fas fa-user-alt"></i>
+        </a>
+        <ul
+          class="dropdown-menu dropdown-menu-end"
+          aria-labelledby="navbarDropdownMenuAvatar"
+        >
+          <li>
+            <a class="dropdown-item" href="#">My profile</a>
+          </li>
+          <!-- <li>
+            <a class="dropdown-item" href="#">Settings</a>
+          </li> -->
+          <li>
+            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- Right elements -->
+  </div>
+  <!-- Container wrapper -->
+</nav>
+<!-- Navbar -->
+
+<div id="carouselExampleInterval" class="carousel slide" data-mdb-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active" data-mdb-interval="10000">
+      <img src="{% static 'images/virtual1.jpg' %}" class="d-block w-100" alt="Wild Landscape" style="width: 20rem;height: 40rem;"/>
+    </div>
+    <div class="carousel-item" data-mdb-interval="2000">
+      <img src="{% static 'images/virtual1.png' %}" class="d-block w-100" alt="Camera" style="width: 20rem;height: 40rem;"/>
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'images/virtual2.jpg' %}" class="d-block w-100" alt="Exotic Fruits" style="width: 20rem;height: 40rem;"/>
+    </div>
+  </div>
+  <button class="carousel-control-prev" data-mdb-target="#carouselExampleInterval" type="button" data-mdb-slide="prev">
+>>>>>>> 034b0fe7cd6ae7c369f0c795104015e735ba4ab0
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Previous</span>
   </button>

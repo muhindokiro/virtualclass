@@ -42,8 +42,26 @@
             </div>
             <!-- Collapsible wrapper -->
 
+<<<<<<< HEAD
             <!-- Right elements -->
             <div class="d-flex align-items-center ">
+=======
+      <!-- Left links -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'home' %}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'student' %}">Student</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'lecturer' %}">Lecturer</a>
+        </li>
+      </ul>
+      <!-- Left links -->
+    </div>
+    <!-- Collapsible wrapper -->
+>>>>>>> 034b0fe7cd6ae7c369f0c795104015e735ba4ab0
 
                 <!-- Avatar -->
                 <div class="dropdown ">
@@ -53,6 +71,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end " aria-labelledby="navbarDropdownMenuAvatar ">
 
+<<<<<<< HEAD
                         <li>
                             <a class="dropdown-item " href="{% url 'logout' %} ">Logout</a>
                         </li>
@@ -68,6 +87,38 @@
 
     <!-- <br/> -->
 
+=======
+          <i class="fas fa-user-alt"></i>
+        </a>
+        <ul
+          class="dropdown-menu dropdown-menu-end"
+          aria-labelledby="navbarDropdownMenuAvatar"
+        >
+          <li>
+            <a class="dropdown-item" href="#">My profile</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- Right elements -->
+  </div>
+  <!-- Container wrapper -->
+</nav>
+<!-- Navbar -->
+
+
+<br/>
+<br/>
+<br/>
+<form method="POST" class="post-form" enctype="multipart/form-data">  
+        {% csrf_token %}  
+        {{ form.as_p }}  
+        <button type="submit" class="save btn btn-default">Save</button>  
+</form>  
+>>>>>>> 034b0fe7cd6ae7c369f0c795104015e735ba4ab0
 
 
     <section class=" ">
