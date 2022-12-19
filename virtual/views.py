@@ -3,44 +3,34 @@ from django.http import HttpResponse
 from django.forms import inlineformset_factory
 from django.contrib.auth.forms import UserCreationForm
 from virtual.functions.functions import handle_uploaded_file
+from django.contrib.auth.models import Group
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required,permission_required
+from .decorators import allowed_users,admin_only
 
 # Create your views here.
 from django.core.files.storage import FileSystemStorage
-from .models import *
-from .forms import CreateUserForm, LectureForm
+from .models import File,Customer
+from .forms import CreateUserForm,FileForm
 
-# from django.conf import settings
-# from django.core.files.storage import FileSystemStorage
-
-# from uploads.core.models import Document
-# from uploads.core.forms import DocumentForm
-
+from django.conf import settings
 
 def home(request):
     return render(request, "home.html")
 
 
-def upload(request):
-    context = {}
-    if request.method == "POST":
-        uploaded_file = request.FILES["document"]
-        fs = FileSystemStorage()
-        name = fs.save(uploaded_file.name, uploaded_file)
-        context["url"] = fs.url(name)
-    return render(request, "lecturer.html", context)
-
-
 @login_required(login_url="login")
+@allowed_users(allowed_roles=['student'])
 def studentPage(request):
     return render(request, "student.html")
 
 
 @login_required(login_url="login")
+@allowed_users(allowed_roles=['lecturer'])
 def lecturerPage(request):
-    return render(request, "lecturer.html")
+    files = File.objects.all()
+    return render(request, "lecturer.html", {'files': files})
 
 
 def registerPage(request):
@@ -51,10 +41,13 @@ def registerPage(request):
         if request.method == "POST":
             form = CreateUserForm(request.POST)
             if form.is_valid():
-                form.save()
-                user = form.cleaned_data.get("username")
-                messages.success(request, "Account was created for " + user)
+                user = form.save()
+                username = form.cleaned_data.get("username")
+                messages.success(request, "Account was created for " + username)
 
+                group = Group.objects.get(name='student')
+                user.groups.add(group)
+                
                 return redirect("login")
 
         context = {"form": form}
@@ -85,38 +78,18 @@ def logoutUser(request):
     logout(request)
     return redirect("login")
 
-
-def upload(request):
-    if request.method == "POST":
-        file = LectureForm(request.POST, request.FILES)
-        if file.is_valid():
-            handle_uploaded_file(request.FILES["file"])
-            return HttpResponse("File uploaded successfuly")
+@login_required(login_url="login")
+@allowed_users(allowed_roles=['lecturer'])
+def upload_file(request):
+    if request.method == 'POST':
+        form =  FileForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('lecturer')
     else:
-        file = LectureForm()
-        return render(request, "lecturer.html", {"form": file})
+        form = FileForm()
+    return render(request, "upload.html", {'form': form})
 
 
-# def simple_upload(request):
-#     if request.method == 'POST' and request.FILES['myfile']:
-#         myfile = request.FILES['myfile']
-#         fs = FileSystemStorage()
-#         filename = fs.save(myfile.name, myfile)
-#         uploaded_file_url = fs.url(filename)
-#         return render(request, 'core/simple_upload.html', {
-#             'uploaded_file_url': uploaded_file_url
-#         })
-#     return render(request, 'core/simple_upload.html')
 
 
-# def model_form_upload(request):
-#     if request.method == 'POST':
-#         form = DocumentForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('home')
-#     else:
-#         form = DocumentForm()
-#     return render(request, 'core/model_form_upload.html', {
-#         'form': form
-#     })
