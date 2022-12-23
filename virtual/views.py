@@ -1,106 +1,95 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.forms import inlineformset_factory
 from django.contrib.auth.forms import UserCreationForm
-from virtual.functions.functions import handle_uploaded_file  
+from virtual.functions.functions import handle_uploaded_file
+from django.contrib.auth.models import Group
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required,permission_required
+from .decorators import allowed_users,admin_only
+
 # Create your views here.
-from .models import *
-from .forms import CreateUserForm,LectureForm
-# from django.conf import settings
-# from django.core.files.storage import FileSystemStorage
+from django.core.files.storage import FileSystemStorage
+from .models import File,Customer
+from .forms import CreateUserForm,FileForm
 
-# from uploads.core.models import Document
-# from uploads.core.forms import DocumentForm
-
-
-
+from django.conf import settings
 
 def home(request):
     return render(request, "home.html")
 
-@login_required(login_url='login')
+
+@login_required(login_url="login")
+@allowed_users(allowed_roles=['student'])
 def studentPage(request):
     return render(request, "student.html")
 
-@login_required(login_url='login')
+
+@login_required(login_url="login")
+@allowed_users(allowed_roles=['lecturer'])
 def lecturerPage(request):
-    return render(request, "lecturer.html")
+    files = File.objects.all()
+    return render(request, "lecturer.html", {'files': files})
+
 
 def registerPage(request):
-	if request.user.is_authenticated:
-		return redirect('home')
-	else:
-		form = CreateUserForm()
-		if request.method == 'POST':
-			form = CreateUserForm(request.POST)
-			if form.is_valid():
-				form.save()
-				user = form.cleaned_data.get('username')
-				messages.success(request, 'Account was created for ' + user)
+    if request.user.is_authenticated:
+        return redirect("home")
+    else:
+        form = CreateUserForm()
+        if request.method == "POST":
+            form = CreateUserForm(request.POST)
+            if form.is_valid():
+                user = form.save()
+                username = form.cleaned_data.get("username")
+                messages.success(request, "Account was created for " + username)
 
-				return redirect('login')
+                group = Group.objects.get(name='student')
+                user.groups.add(group)
+                
+                return redirect("login")
 
-		context = {'form':form}
-		return render(request, 'register.html', context)
+        context = {"form": form}
+        return render(request, "register.html", context)
 
 
 def loginPage(request):
-	if request.user.is_authenticated:
-		return redirect('home')
-	else:
-		if request.method == 'POST':
-			username = request.POST.get('username')
-			password =request.POST.get('password')
+    if request.user.is_authenticated:
+        return redirect("home")
+    else:
+        if request.method == "POST":
+            username = request.POST.get("username")
+            password = request.POST.get("password")
 
-			user = authenticate(request, username=username, password=password)
+            user = authenticate(request, username=username, password=password)
 
-			if user is not None:
-				login(request, user)
-				return redirect('home')
-			else:
-				messages.info(request, 'Username or Password is incorrect')
-   
-		context = {}
-		return render(request, 'login.html', context)
+            if user is not None:
+                login(request, user)
+                return redirect("home")
+            else:
+                messages.info(request, "Username or Password is incorrect")
+
+        context = {}
+        return render(request, "login.html", context)
 
 
 def logoutUser(request):
-	logout(request)
-	return redirect('login')
+    logout(request)
+    return redirect("login")
 
-def upload(request):  
-    if request.method == 'POST':  
-        file = LectureForm(request.POST, request.FILES)  
-        if file.is_valid():  
-            handle_uploaded_file(request.FILES['file'])  
-            return HttpResponse("File uploaded successfuly")  
-    else:  
-        file = LectureForm()  
-        return render(request,"lecturer.html",{'form':file})  
-    
-# def simple_upload(request):
-#     if request.method == 'POST' and request.FILES['myfile']:
-#         myfile = request.FILES['myfile']
-#         fs = FileSystemStorage()
-#         filename = fs.save(myfile.name, myfile)
-#         uploaded_file_url = fs.url(filename)
-#         return render(request, 'core/simple_upload.html', {
-#             'uploaded_file_url': uploaded_file_url
-#         })
-#     return render(request, 'core/simple_upload.html')
+@login_required(login_url="login")
+@allowed_users(allowed_roles=['lecturer'])
+def upload_file(request):
+    if request.method == 'POST':
+        form =  FileForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('lecturer')
+    else:
+        form = FileForm()
+    return render(request, "upload.html", {'form': form})
 
 
-# def model_form_upload(request):
-#     if request.method == 'POST':
-#         form = DocumentForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('home')
-#     else:
-#         form = DocumentForm()
-#     return render(request, 'core/model_form_upload.html', {
-#         'form': form
-#     })
+
+
