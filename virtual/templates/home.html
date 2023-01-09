@@ -1,73 +1,54 @@
 {% load static %}
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Font Awesome -->
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-      rel="stylesheet"
-    />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
     <!-- Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <!-- MDB -->
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.0/mdb.min.css"
-      rel="stylesheet"
-    />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.0/mdb.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="" />
     <title>Document</title>
-  </head>
-  <body>
-    <!-- <h1>Hello world</h1> -->
+</head>
+
+<body>
+
     <!-- Navbar -->
-    <nav
-      class="navbar navbar-expand-lg navbar-light"
-      style="background-color: #4a6e64"
-    >
-      <!-- Container wrapper -->
-      <div class="container-fluid">
-        <!-- Toggle button -->
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-mdb-toggle="collapse"
-          data-mdb-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #4a6e64">
+        <!-- Container wrapper -->
+        <div class="container-fluid">
+            <!-- Toggle button -->
+            <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <i class="fas fa-bars"></i>
         </button>
 
-        <!-- Collapsible wrapper -->
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <!-- Navbar brand -->
+            <!-- Collapsible wrapper -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Navbar brand -->
 
-          <!-- Left links -->
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'home' %}">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'student' %}">Student</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'lecturer' %}">Lecturer</a>
-            </li>
-          </ul>
-          <!-- Left links -->
-        </div>
-        <!-- Collapsible wrapper -->
+                <!-- Left links -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'student' %}">Student</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'lecturer' %}">Lecturer</a>
+                    </li>
+                </ul>
+                <!-- Left links -->
+            </div>
+            <!-- Collapsible wrapper -->
 
-        <!-- Right elements -->
-        <div class="d-flex align-items-center">
-          <span style="margin-right: 20px; color: white"
-            >Hello, {{ request.user }}</span
+            <!-- Right elements -->
+            <div class="d-flex align-items-center">
+                <span style="margin-right: 20px; color: white">Hello, {{ request.user }}</span
           >
 
           <!-- Avatar -->
@@ -142,81 +123,60 @@
         data-mdb-slide="prev"
       >
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button
-        class="carousel-control-next"
-        data-mdb-target="#carouselExampleInterval"
-        type="button"
-        data-mdb-slide="next"
-      >
+                <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" data-mdb-target="#carouselExampleInterval" type="button" data-mdb-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
       </button>
-    </div>
-    <!-- <br/> -->
+            </div>
+            <!-- <br/> -->
 
-    <div class="container-fluid row row-cols-1 row-cols-md-3 g-4">
-      <div class="col">
-        <div class="card ml-4 mt-4" style="width: 20rem; height: 25rem">
-          <img
-            src="{% static 'images/img1.jpeg' %}"
-            class="card-img-top"
-            alt="Hollywood Sign on The Hill"
-          />
-          <div class="card-body">
-            <h5 class="card-title">Engaging Online Learning Platforms</h5>
-            <p class="card-text">
-              Due to the increasing demand for virtual learning, more and more
-              modern platforms are evolving.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card ml-4 mt-4" style="width: 20rem; height: 25rem">
-          <img
-            src="{% static 'images/img2.jpg' %}"
-            class="card-img-top"
-            alt="Palm Springs Road"
-          />
-          <div class="card-body">
-            <h5 class="card-title">Flexibility and Accessibility</h5>
-            <p class="card-text">
-              Virtual learning offers complete flexibility compared to the
-              traditional school system
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card ml-4 mt-4" style="width: 20rem; height: 25rem">
-          <img
-            src="{% static 'images/img3.jpg' %}"
-            class="card-img-top"
-            alt="Los Angeles Skyscrapers"
-          />
-          <div class="card-body">
-            <h5 class="card-title">Participation in Online Discussions</h5>
-            <p class="card-text">
-              Throughout these classrooms, collaboration and sharing can take
-              place among students.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <br />
-    <br />
+            <div class="container-fluid row row-cols-1 row-cols-md-3 g-4">
+                <div class="col">
+                    <div class="card ml-4 mt-4" style="width: 20rem; height: 25rem">
+                        <img src="{% static 'images/img1.jpeg' %}" class="card-img-top" alt="Hollywood Sign on The Hill" />
+                        <div class="card-body">
+                            <h5 class="card-title">Engaging Online Learning Platforms</h5>
+                            <p class="card-text">
+                                Due to the increasing demand for virtual learning, more and more modern platforms are evolving.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card ml-4 mt-4" style="width: 20rem; height: 25rem">
+                        <img src="{% static 'images/img2.jpg' %}" class="card-img-top" alt="Palm Springs Road" />
+                        <div class="card-body">
+                            <h5 class="card-title">Flexibility and Accessibility</h5>
+                            <p class="card-text">
+                                Virtual learning offers complete flexibility compared to the traditional school system
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card ml-4 mt-4" style="width: 20rem; height: 25rem">
+                        <img src="{% static 'images/img3.jpg' %}" class="card-img-top" alt="Los Angeles Skyscrapers" />
+                        <div class="card-body">
+                            <h5 class="card-title">Participation in Online Discussions</h5>
+                            <p class="card-text">
+                                Throughout these classrooms, collaboration and sharing can take place among students.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <br />
 
-    <section class="">
-      <!-- Footer -->
-      <footer class="text-center text-white" style="background-color: #0a4275">
-        <!-- Copyright -->
-        <div class="text-center p-3" style="background-color: #4a6e64">
-          © 2022 Copyright:
-          <a class="text-white" href="https://mdbootstrap.com/"
-            >Virtual Class</a
+            <section class="">
+                <!-- Footer -->
+                <footer class="text-center text-white" style="background-color: #0a4275">
+                    <!-- Copyright -->
+                    <div class="text-center p-3" style="background-color: #4a6e64">
+                        © 2022 Copyright:
+                        <a class="text-white" href="https://mdbootstrap.com/">Virtual Class</a
           >
         </div>
         <!-- Copyright -->
