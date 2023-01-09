@@ -23,7 +23,8 @@ def home(request):
 @login_required(login_url="login")
 @allowed_users(allowed_roles=['student'])
 def studentPage(request):
-    return render(request, "student.html")
+    files = File.objects.all()
+    return render(request, "student.html", {'files': files})
 
 
 @login_required(login_url="login")

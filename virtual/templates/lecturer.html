@@ -104,37 +104,38 @@
     <br />
     <br />
     <div>
-        <h2>upload file</h2>
-      
-    <table  class="table">
+      <h2>Upload file</h2>
+
+      <table class="table">
         <thead>
-            <tr>
-                <th>Lecturer Name</th>
-                <th>Course Title</th>
-                <th>Pdf</th>
-                <th>Download</th>
-            </tr>
+          <tr>
+            <th>Lecturer Name</th>
+            <th>Course Title</th>
+            <th>Pdf</th>
+            <th>Download</th>
+          </tr>
         </thead>
         <tbody>
-            {% for file in files %}
-            <tr>
-                <td>{{ file.fullname }}</td>
-                <td>{{ file.title }}</td>
-                <td>{{ file.pdf }}</td>
-                <td>
-                    <a href="{{ file.pdf.url }}" class="btn btn-primary btn-sm" target="_blank">
-                        Download PDF
-                    </a>
-                </td>
-            </tr>
-            {% endfor %}
+          {% for file in files %}
+          <tr>
+            <td>{{ file.fullname }}</td>
+            <td>{{ file.title }}</td>
+            <td>{{ file.pdf }}</td>
+            <td>
+              <a
+                href="{{ file.pdf.url }}"
+                class="btn btn-primary btn-sm"
+                target="_blank"
+              >
+                Download PDF
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
         </tbody>
-    </table>
-    <!-- <a href="#" class="btn btn-primary">Button</a> -->
- 
-
-      
-</div>
+      </table>
+      <!-- <a href="#" class="btn btn-primary">Button</a> -->
+    </div>
 
     <section class="">
       <!-- Footer -->
