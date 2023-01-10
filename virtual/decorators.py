@@ -30,3 +30,4 @@ def admin_only(view_func):
             return redirect('user-page')
         
     return wrapper_function
+    # takes another function and and extends the behavi
