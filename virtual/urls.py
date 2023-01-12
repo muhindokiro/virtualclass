@@ -5,6 +5,7 @@ from django.conf import settings
 
 urlpatterns = [
     path("", views.home, name="home"),
+    path("camera/", views.cameraView, name="camera"),
     path("register/", views.registerPage, name="register"),
     path("login/", views.loginPage, name="login"),
     path("logout/", views.logoutUser, name="logout"),
