@@ -7,7 +7,6 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required,permission_required
 from .decorators import allowed_users,admin_only
-from .decorators import allowed_users,admin_only
 from django.views.decorators import gzip
 from django.http import StreamingHttpResponse
 import cv2
@@ -16,7 +15,7 @@ import threading
 
 # Create your views here.
 from django.core.files.storage import FileSystemStorage
-from .models import File,Customer
+from .models import File
 from .forms import CreateUserForm,FileForm
 
 from django.conf import settings
