@@ -8,13 +8,16 @@ body{
     border-radius: 0.5rem;
     background: #fff;
 }
+
 .profile-img{
     text-align: center;
 }
+
 .profile-img img{
     width: 70%;
     height: 100%;
 }
+
 .profile-img .file {
     position: relative;
     overflow: hidden;
@@ -25,18 +28,22 @@ body{
     font-size: 15px;
     background: #212529b8;
 }
+
 .profile-img .file input {
     position: absolute;
     opacity: 0;
     right: 0;
     top: 0;
 }
+
 .profile-head h5{
     color: #333;
 }
+
 .profile-head h6{
     color: #0062cc;
 }
+
 .profile-edit-btn{
     border: none;
     border-radius: 1.5rem;
@@ -46,11 +53,13 @@ body{
     color: #6c757d;
     cursor: pointer;
 }
+
 .proile-rating{
     font-size: 12px;
     color: #818182;
     margin-top: 5%;
 }
+
 .proile-rating span{
     color: #495057;
     font-size: 15px;
