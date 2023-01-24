@@ -15,13 +15,20 @@ import threading
 
 # Create your views here.
 from django.core.files.storage import FileSystemStorage
-from .models import File,Customer
+from .models import File,Profile
 from .forms import CreateUserForm,FileForm
 
 from django.conf import settings
 
 def home(request):
     return render(request, "home.html")
+
+@login_required(login_url="login")
+def userProfile(request):
+    context = {
+        'user': request.user
+    }
+    return render(request, "profile.html", context)
 
 @gzip.gzip_page
 def cameraView(request):
