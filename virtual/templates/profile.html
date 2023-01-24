@@ -12,6 +12,12 @@
     />
     <link
       rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
       type="text/css"
       href="{% static '/css/main.css' %}"
     />
@@ -30,8 +36,65 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.0/mdb.min.css"
       rel="stylesheet"
     />
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        /* background: #7abecc !important; */
+      }
+      .user_card {
+        width: 350px;
+        margin-top: auto;
+        margin-bottom: auto;
+        /* background: #74cfbf; */
+        position: relative;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        padding: 10px;
+        /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+          0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+          0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+          0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+        border-radius: 5px;
+      }
+
+      .form_container {
+        margin-top: 20px;
+      }
+
+      #form-title {
+        color: #fff;
+      }
+      .login_btn {
+        width: 100%;
+        background: #33ccff !important;
+        color: white !important;
+      }
+      .login_btn:focus {
+        box-shadow: none !important;
+        outline: 0px !important;
+      }
+      .login_container {
+        padding: 0 2rem;
+      }
+      .input-group-text {
+        background: #f7ba5b !important;
+        color: white !important;
+        border: 0 !important;
+        border-radius: 0.25rem 0 0 0.25rem !important;
+      }
+      .input_user,
+      .input_pass:focus {
+        box-shadow: none !important;
+        outline: 0px !important;
+      }
+    </style>
+
     <title>Document</title>
   </head>
   <body>
@@ -115,13 +178,87 @@
     </nav>
     <!-- Navbar -->
 
+    <!--UPDATE FORM-->
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="exampleModalCenter"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="background: #74cfbf">
+          <div class="modal-header">
+            <!-- <h5 class="modal-title" id="exampleModalLongTitle">
+              Update Profile
+            </h5> -->
+
+            <form action="" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              <fieldset class="form-group">
+                <legend class="border-bottom mb-4"></legend>
+                <p>Username: {{ u_form.username }} </p>
+              </fieldset>
+              <fieldset class="form-group">
+                <legend class="border-bottom mb-4"></legend>
+                <p>Email: {{ u_form.email }} </p>
+              </fieldset>
+              <fieldset class="form-group">
+                <legend class="border-bottom mb-4"></legend>
+                <p>Image: {{ p_form.image }} </p>
+              </fieldset>
+              <fieldset class="form-group">
+                <legend class="border-bottom mb-4"></legend>
+                <p>School: {{ p_form.school }} </p>
+              </fieldset>
+              <fieldset class="form-group">
+                <legend class="border-bottom mb-4"></legend>
+                <p>Telephone: {{ p_form.phone }} </p>
+              </fieldset>
+              <fieldset class="form-group">
+                <legend class="border-bottom mb-4"></legend>
+                <p>Profession: {{ p_form.profession }} </p>
+              </fieldset>
+              <div class="form-group">
+                <button class="btn btn-outline-info" type="submit" style="background: white">Update Account</button>
+              </div>
+            </form>
+
+            <!-- <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            > -->
+              <!-- <span aria-hidden="true">&times;</span> -->
+            </button>
+          </div>
+          <!-- <div class="modal-body">...</div> -->
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--UPDATE FORM-->
+
     <div class="container emp-profile">
       <form method="post">
         <div class="row">
           <div class="col-md-4">
             <div class="profile-img">
               <img src="{{ user.profile.image.url }}" alt="" />
-              <div class="file btn btn-lg btn-primary">
+              
+              <div class="file btn btn-sm btn-primary">
                 Change Photo
                 <input type="file" name="file" />
               </div>
@@ -149,10 +286,12 @@
           </div>
           <div class="col-md-2">
             <input
-              type="submit"
-              class="profile-edit-btn"
               name="btnAddMore"
               value="Edit Profile"
+              type="button"
+              class="btn btn-primary"
+              data-toggle="modal"
+              data-target="#exampleModalCenter"
             />
           </div>
         </div>
@@ -221,4 +360,21 @@
       </form>
     </div>
   </body>
+  <script
+    src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"
+  ></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </html>
