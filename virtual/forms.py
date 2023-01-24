@@ -15,12 +15,12 @@ class FileForm(forms.ModelForm):
         model = File
         fields = ('fullname', 'title', 'pdf')
 
-class UpdateUserForm(UserCreationForm):
+class UpdateUserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ["username", "email"]
 
-class ProfileUpdateForm(UserCreationForm):
+class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ["image", "school", "phone", "profession"]
