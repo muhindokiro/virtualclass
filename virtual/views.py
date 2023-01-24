@@ -11,12 +11,20 @@ from django.views.decorators import gzip
 from django.http import StreamingHttpResponse
 import cv2
 import threading
+<<<<<<< HEAD
 
 
 # Create your views here.
 from django.core.files.storage import FileSystemStorage
 from .models import File
 from .forms import CreateUserForm,FileForm
+=======
+
+# Create your views here.
+from django.core.files.storage import FileSystemStorage
+from .models import File,Profile
+from .forms import CreateUserForm,FileForm,UpdateUserForm,ProfileUpdateForm
+>>>>>>> 6d407208e559b9b5c1f1cb42881be568ee845720
 
 from django.conf import settings
 
@@ -30,6 +38,37 @@ def cameraView(request):
     except:
         pass
     return render(request, "camera.html")    
+
+@login_required(login_url="login")
+def userProfile(request):
+    if request.method == 'POST':
+        u_form = UpdateUserForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+        
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Your account has been updated')
+            return redirect('profile')
+    else:
+        u_form = UpdateUserForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.profile)
+    
+    context = {
+        'user': request.user,
+        'u_form': u_form,
+        'p_form': p_form
+    }
+    return render(request, "profile.html", context)
+
+@gzip.gzip_page
+def cameraView(request):
+    try:
+        cam = VideoCamera()
+        return StreamingHttpResponse(gen(cam), content_type="multipart/x-mixed-replace;boundary=frame")
+    except:
+        pass
+    return render(request, "camera.html")
 
 
 @login_required(login_url="login")
@@ -128,6 +167,30 @@ def gen(camera):
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
                
 
+#to capture video class
+class VideoCamera(object):
+    def __init__(self):
+        self.video = cv2.VideoCapture(0)
+        (self.grabbed, self.frame) = self.video.read()
+        threading.Thread(target=self.update, args=()).start()
+
+    def __del__(self):
+        self.video.release()
+
+    def get_frame(self):
+        image = self.frame
+        _, jpeg = cv2.imencode('.jpg', image)
+        return jpeg.tobytes()
+
+    def update(self):
+        while True:
+            (self.grabbed, self.frame) = self.video.read()
+
+def gen(camera):
+    while True:
+        frame = camera.get_frame()
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
 
 

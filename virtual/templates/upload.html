@@ -64,7 +64,9 @@
               aria-labelledby="navbarDropdownMenuAvatar"
             >
               <li>
-                <a class="dropdown-item" href="#">My profile</a>
+                <a class="dropdown-item" href="{% url 'profile' %}"
+                  >My profile</a
+                >
               </li>
               <li>
                 <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
@@ -85,10 +87,9 @@
         <div class="card-header">Upload File</div>
         <div class="card-body">
           <form method="post" action="" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.as_p }}
+            {% csrf_token %} {{ form.as_p }}
             <button type="submit" class="btn btn-primary">Upload File</button>
-        </form>
+          </form>
         </div>
         <div class="card-footer text-muted"></div>
       </div>
