@@ -1,12 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-<<<<<<< HEAD
-class user(models.Model):
-
-    name = models.CharField(max_length=200, null=True)
-    email = models.CharField(max_length=200, null=True)
-=======
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(default='default.jpeg', upload_to='profile_pics/')
@@ -17,7 +11,6 @@ class Profile(models.Model):
     
     def __str__(self):
         return f' {self.user.username} Profile'
->>>>>>> 6d407208e559b9b5c1f1cb42881be568ee845720
     
 class File(models.Model):
     fullname = models.CharField(max_length=50)

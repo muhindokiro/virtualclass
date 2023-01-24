@@ -11,20 +11,11 @@ from django.views.decorators import gzip
 from django.http import StreamingHttpResponse
 import cv2
 import threading
-<<<<<<< HEAD
-
-
-# Create your views here.
-from django.core.files.storage import FileSystemStorage
-from .models import File
-from .forms import CreateUserForm,FileForm
-=======
 
 # Create your views here.
 from django.core.files.storage import FileSystemStorage
 from .models import File,Profile
 from .forms import CreateUserForm,FileForm,UpdateUserForm,ProfileUpdateForm
->>>>>>> 6d407208e559b9b5c1f1cb42881be568ee845720
 
 from django.conf import settings
 
