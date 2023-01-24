@@ -32,13 +32,14 @@
                 <!-- Left links -->
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a style="font-family: 'Times New Roman', Times, serif;" class="nav-link" href="{% url 'home' %}">Home</a>
+                        <!-- <a style="font-family: 'Times New Roman', Times, serif;" class="nav-link" href="{% url 'home' %}">Home</a> -->
+                        <a style="margin-right: 20px; color: white" class="nav-link" href="{% url 'home' %}">Home</a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" href="{% url 'lecturer' %} ">Lecturer</a>
-                    </li>
+                    </li> -->
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'upload_file' %} ">Upload</a>
+                        <a style="margin-right: 20px; color: white" class="nav-link" href="{% url 'upload_file' %} ">Upload</a>
                     </li>
                 </ul>
                 <!-- Left links -->
@@ -84,7 +85,8 @@
     <br />
     <br />
     <div>
-      <h2><a class="nav-link" href="{% url 'camera' %}" style="color: blue">Start Class</a>
+      <h2><a class="nav-link" href="{% url 'camera' %}" style="color: blue"><button type="submit" class="btn btn-primary">Click to start class</button></a>
+        
       </h2>
       <h2>Upload file</h2>
 
