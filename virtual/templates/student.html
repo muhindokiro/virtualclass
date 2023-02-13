@@ -1,3 +1,5 @@
+{% load static %}
+
 <html lang="en">
 
 <head>
@@ -312,30 +314,35 @@
         </div>
       </div>
     </section>
-    
+   
      <h2>Uploaded file</h2>
-      
+     
     <table  class="table">
         <thead>
             <tr>
                 <th>Lecturer Name</th>
                 <th>Course Title</th>
                 <th>Pdf</th>
+                <th>View</th>
                 <th>Download</th>
             </tr>
         </thead>
         <tbody>
             {% for file in files %}
+            <form action="{% url 'notify' %}">
             <tr>
                 <td>{{ file.fullname }}</td>
                 <td>{{ file.title }}</td>
                 <td>{{ file.pdf }}</td>
+                <td><a href="/"><i class="fa-solid fa-eye"></i></a></td>
                 <td>
-                    <a href="{{ file.pdf.url }}" class="btn btn-primary btn-sm" target="_blank">
+                 
+                    <a href="{{ file.pdf.url }}" value={{ user_notification }} class="btn btn-primary btn-sm" target="_blank">
                         Download PDF
                     </a>
                 </td>
             </tr>
+            </form>
             {% endfor %}
         </tbody>
     </table>
