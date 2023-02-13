@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.template import loader
 from django.forms import inlineformset_factory
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import Group
@@ -8,7 +9,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required,permission_required
 from .decorators import allowed_users,admin_only
 from django.views.decorators import gzip
-from django.http import StreamingHttpResponse
+from django.http import StreamingHttpResponse,HttpResponse
 import cv2
 import threading
 
@@ -65,7 +66,10 @@ def cameraView(request):
 @login_required(login_url="login")
 @allowed_users(allowed_roles=['student'])
 def studentPage(request):
+    # user = request.user
     files = File.objects.all()
+    # files = File.objects.filter(user=user).order_by('-date')
+
     return render(request, "student.html", {'files': files})
 
 
@@ -117,10 +121,14 @@ def loginPage(request):
         return render(request, "login.html", context)
 
 
+
 def logoutUser(request):
     logout(request)
     return redirect("login")
 
+def notify_lecture(self):
+    print('TESTING THE PRINT')
+    
 @login_required(login_url="login")
 @allowed_users(allowed_roles=['lecturer'])
 def upload_file(request):
@@ -128,6 +136,7 @@ def upload_file(request):
         form =  FileForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
+            messages.success(request)
             return redirect('lecturer')
     else:
         form = FileForm()
@@ -184,4 +193,17 @@ def gen(camera):
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
 
+def userNotification(request):
+    user = request.user
+    files = File.objects.filter(user=user).order_by('-date')
 
+    template = loader.get_template('student.html')
+
+    context = {
+        'files': files,
+    }
+
+    print('TESTING THE DOWNLOAD!!!')
+    
+    return HttpResponse(template.render(context, request))
+    # return render(request, 'student.html')

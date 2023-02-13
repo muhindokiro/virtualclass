@@ -1,5 +1,4 @@
 {% load static %}
-
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -69,6 +68,10 @@
 
       #form-title {
         color: #fff;
+      }
+
+      #btn-nav{
+        color: blue;
       }
       .login_btn {
         width: 100%;
@@ -143,7 +146,13 @@
           <span style="margin-right: 20px; color: rgb(3, 3, 3)"
             >{{ request.user }}</span
           >
-
+          <!-- Notification-->
+          <div class="col-sm">
+            <a class="text-light">
+              <i class="far fa-bell" id="btn-nav"><span class="pending" style="color: black;">5</span></i>
+            </a>
+          </div>
+          <!-- Notification-->
           <!-- Avatar -->
           <div class="dropdown">
             <a
