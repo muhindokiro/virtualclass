@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.template import loader
 from django.forms import inlineformset_factory
 from django.contrib.auth.forms import UserCreationForm
 from virtual.functions.functions import handle_uploaded_file
@@ -58,8 +59,10 @@ def cameraView(request):
 @login_required(login_url="login")
 @allowed_users(allowed_roles=['student'])
 def studentPage(request):
+    # user = request.user
     files = File.objects.all()
-    print('WHEN IS IT CALLED111')
+    # files = File.objects.filter(user=user).order_by('-date')
+
     return render(request, "student.html", {'files': files})
 
 
@@ -160,7 +163,7 @@ def gen(camera):
 
 def userNotification(request):
     user = request.user
-    files = File.objects.filter(user=user).order_by('-sate')
+    files = File.objects.filter(user=user).order_by('-date')
 
     template = loader.get_template('student.html')
 
@@ -169,7 +172,6 @@ def userNotification(request):
     }
 
     print('TESTING THE DOWNLOAD!!!')
-
     
     return HttpResponse(template.render(context, request))
     # return render(request, 'student.html')

@@ -334,7 +334,7 @@
                 <td>{{ file.fullname }}</td>
                 <td>{{ file.title }}</td>
                 <td>{{ file.pdf }}</td>
-                <td><a href="/"><i class="fa-solid fa-eye"></i></a></td>
+                <td><a href="{{ file.save_pdf.url }}"><i class="fa-solid fa-eye"></i></a></td>
                 <td>
                  
                     <a href="{{ file.pdf.url }}" value={{ user_notification }} class="btn btn-primary btn-sm" target="_blank">
