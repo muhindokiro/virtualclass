@@ -9,9 +9,10 @@ urlpatterns = [
     path("register/", views.registerPage, name="register"),
     path("profile/", views.userProfile, name="profile"),
     path("login/", views.loginPage, name="login"),
+    path("notifications/", views.userNotification, name="notify"),
     path("logout/", views.logoutUser, name="logout"),
     path("student/", views.studentPage, name="student"),
     path("lecturer/", views.lecturerPage, name="lecturer"),
     path("lecturer/upload/", views.upload_file, name="upload_file"),
-    
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+   
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
