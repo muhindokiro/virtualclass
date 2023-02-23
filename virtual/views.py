@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
@@ -179,4 +179,24 @@ def like(request, post_id):
     post.likes = current_likes
     post.save()
 
-    return HttpResponseRedirect(reverse('student', args=[post_id]))
+    return HttpResponseRedirect(reverse('postdetails', args=[post_id]))
+
+@login_required
+def PostDetails(request, post_id):
+    post = get_object_or_404(File, id=post_id)
+    user = request.user
+    profile = Profile.objects.get(user=user)
+    favorited = False
+
+    if request.user.is_authenticated:
+        profile = Profile.objects.get(user=user)
+        # For the color of the favorite button
+
+    template = loader.get_template('post_detail.html')
+
+    context = {
+        'post': post,
+    }
+
+    return HttpResponse(template.render(context, request))
+
