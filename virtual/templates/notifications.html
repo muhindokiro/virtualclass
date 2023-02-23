@@ -80,11 +80,12 @@
 
   <div class="card text-center">
     {% if notification.notification_type == 1 %}
-    <div class="card-header">
-      {{ notification.sender.username }}
-    </div>
+
     <div class="card-body">
-      <h5 class="card-title">{{ notification.sender.email }}</h5>
+      <h8 class="card-title">{{ notification.sender.username }}</h8>
+      <br>
+      <h8 class="card-title">{{ notification.sender.email }}</h8>
+      <br>
       <span><i class="fa-solid fa-eye"></i>
         <p> viewed the file</p>
       </span>
