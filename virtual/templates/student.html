@@ -57,7 +57,7 @@
           </a>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
             <li>
-              <a class="dropdown-item" href="#">My profile</a>
+              <a class="dropdown-item" href="{% url 'profile' %}">My profile</a>
             </li>
             <li>
               <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
@@ -272,7 +272,6 @@
         <th>Course Title</th>
         <th>Pdf</th>
         <th>View</th>
-        <th>Download</th>
       </tr>
     </thead>
     <tbody>
@@ -283,12 +282,7 @@
           <td>{{ file.title }}</td>
           <td>{{ file.pdf }}</td>
           <td><a href="{% url 'postlike' file.id %}"><i class="fa-solid fa-eye"></i>{{ file.likes }}</a></td>
-          <td>
 
-            <a href="{{ file.pdf.url }}" value={{ user_notification }} class="btn btn-primary btn-sm" target="_blank">
-              Download PDF
-            </a>
-          </td>
         </tr>
       </form>
       {% endfor %}
