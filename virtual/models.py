@@ -1,16 +1,22 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
-# from notification.models import Notification
+from notifications.models import Notification
 from django.db.models.signals import post_save
+import uuid
+from django.urls import reverse
+from django.db.models.signals import post_save,  post_delete
+
+# Create your models here.
+def user_directory_path(instance, filename):
+    # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
+    return 'user_{0}/{1}'.format(instance.user.id, filename)
 
 class Profile(models.Model):
-    NOTIFICATION_TYPES = ((1, 'Save'), (2, 'Unsave'))
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, default="1")
     image = models.ImageField(default='default.jpeg', upload_to='profile_pics/')
     school = models.CharField(max_length=200, null=True)
-    notification_type = models.IntegerField(choices=NOTIFICATION_TYPES, null=True)
     phone = models.CharField(max_length=200, null=True)
     profession = models.CharField(max_length=200, null=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
@@ -19,34 +25,44 @@ class Profile(models.Model):
         return f' {self.user.username} Profile'
     
 class File(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     fullname = models.CharField(max_length=50)
     title = models.CharField(max_length=50)
     pdf = models.FileField(upload_to='files/pdfs/')
     date = models.DateTimeField(auto_now_add=True, null=True)
-    save_pdf = models.ForeignKey(User, on_delete=models.CASCADE, related_name='save_pdf', null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    likes = models.IntegerField(default=0)
 
-    def user_save_pdf(sender, instance, *args, **kwargs):
-        save = instance
-        save_pdf = save.save_pdf
-        sender = save.user
+    def get_absolute_url(self):
+        return reverse('upload', args=[str(self.id)])
 
-        notify = Profile(sender=sender, user=save_pdf, notification_type=1)
+    def __str__(self):
+        return self.id
+
+
+class Likes(models.Model):
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='user_like')
+    post = models.ForeignKey(
+        File, on_delete=models.CASCADE, related_name='post_like')
+
+    def user_liked_post(sender, instance, *args, **kwargs):
+        like = instance
+        post = like.post
+        sender = like.user
+        notify = Notification(post=post, sender=sender,
+                              user=post.user, notification_type=1)
         notify.save()
 
-    
-    def __str__(self):
-        return self.title
-   
-# class Notify(models.Model):
-#     save_pdf = models.ForeignKey(User, on_delete=models.CASCADE, related_name='save_pdf', null=True)
+    def user_unlike_post(sender, instance, *args, **kwargs):
+        like = instance
+        post = like.post
+        sender = like.user
 
-#     def user_save_pdf(sender, instance, *args, **kwargs):
-#         save = instance
-#         save_pdf = save.save_pdf
-#         # sender = save.user
+        notify = Notification.objects.filter(
+            post=post, sender=sender, notification_type=1)
+        notify.delete()
 
-#         notify = Profile(sender=sender, user=save_pdf, notification_type=1)
-#         notify.save()
-
-#Save
-post_save.connect(File.user_save_pdf, sender=File)
+# Likes
+post_save.connect(Likes.user_liked_post, sender=Likes)
+post_delete.connect(Likes.user_unlike_post, sender=Likes)

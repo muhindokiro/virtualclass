@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
+from django.urls import reverse
 from django.forms import inlineformset_factory
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import Group
@@ -10,6 +11,7 @@ from django.contrib.auth.decorators import login_required,permission_required
 from .decorators import allowed_users,admin_only
 from django.views.decorators import gzip
 from django.http import StreamingHttpResponse,HttpResponse
+from .models import File, Likes
 import cv2
 import threading
 
@@ -121,14 +123,11 @@ def loginPage(request):
         return render(request, "login.html", context)
 
 
-
 def logoutUser(request):
     logout(request)
     return redirect("login")
 
-def notify_lecture(self):
-    print('TESTING THE PRINT')
-    
+
 @login_required(login_url="login")
 @allowed_users(allowed_roles=['lecturer'])
 def upload_file(request):
@@ -136,7 +135,7 @@ def upload_file(request):
         form =  FileForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            messages.success(request)
+            
             return redirect('lecturer')
     else:
         form = FileForm()
@@ -193,17 +192,23 @@ def gen(camera):
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
 
-def userNotification(request):
+@login_required
+def like(request, post_id):
     user = request.user
-    files = File.objects.filter(user=user).order_by('-date')
+    post = File.objects.get(id=post_id)
+    current_likes = post.likes
+    liked = Likes.objects.filter(user=user, post=post).count()
 
-    template = loader.get_template('student.html')
+    if not liked:
+        like = Likes.objects.create(user=user, post=post)
+        # like.save()
+        current_likes = current_likes + 1
 
-    context = {
-        'files': files,
-    }
+    else:
+        Likes.objects.filter(user=user, post=post).delete()
+        current_likes = current_likes - 1
 
-    print('TESTING THE DOWNLOAD!!!')
-    
-    return HttpResponse(template.render(context, request))
-    # return render(request, 'student.html')
+    post.likes = current_likes
+    post.save()
+
+    return HttpResponseRedirect(reverse('student', args=[post_id]))
