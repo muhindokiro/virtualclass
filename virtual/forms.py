@@ -13,7 +13,7 @@ class CreateUserForm(UserCreationForm):
 class FileForm(forms.ModelForm):
     class Meta:
         model = File
-        fields = ('fullname', 'title', 'pdf')
+        fields = ('fullname', 'title', 'pdf', 'user')
 
 class UpdateUserForm(forms.ModelForm):
     class Meta:

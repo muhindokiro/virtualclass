@@ -9,9 +9,9 @@ urlpatterns = [
     path("register/", views.registerPage, name="register"),
     path("profile/", views.userProfile, name="profile"),
     path("login/", views.loginPage, name="login"),
-    path("notifications/", views.userNotification, name="notify"),
     path("logout/", views.logoutUser, name="logout"),
     path("student/", views.studentPage, name="student"),
+    path('<uuid:post_id>/like', views.like, name='postlike'),
     path("lecturer/", views.lecturerPage, name="lecturer"),
     path("lecturer/upload/", views.upload_file, name="upload_file"),
    
