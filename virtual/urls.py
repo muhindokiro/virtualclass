@@ -12,6 +12,7 @@ urlpatterns = [
     path("logout/", views.logoutUser, name="logout"),
     path("student/", views.studentPage, name="student"),
     path('<uuid:post_id>/like', views.like, name='postlike'),
+    path('<uuid:post_id>', views.PostDetails, name='postdetails'),
     path("lecturer/", views.lecturerPage, name="lecturer"),
     path("lecturer/upload/", views.upload_file, name="upload_file"),
    
