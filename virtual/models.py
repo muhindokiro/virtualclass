@@ -22,10 +22,6 @@ class File(models.Model):
     fullname = models.CharField(max_length=50)
     title = models.CharField(max_length=50)
     pdf = models.FileField(upload_to='files/pdfs/')
-<<<<<<< HEAD
-
- 
-=======
     date = models.DateTimeField(auto_now_add=True, null=True)
     save_pdf = models.ForeignKey(User, on_delete=models.CASCADE, related_name='save_pdf', null=True)
 
@@ -37,7 +33,6 @@ class File(models.Model):
         notify = Profile(sender=sender, user=save_pdf, notification_type=1)
         notify.save()
 
->>>>>>> db36f435831236035081cc10dbc8e657792a3cd0
     
     def __str__(self):
         return self.title
