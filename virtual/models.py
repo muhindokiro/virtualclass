@@ -31,7 +31,7 @@ class File(models.Model):
     pdf = models.FileField(upload_to='files/pdfs/')
     date = models.DateTimeField(auto_now_add=True, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    likes = models.IntegerField(default=0)
+    views = models.IntegerField(default=0)
 
     def get_absolute_url(self):
         return reverse('upload', args=[str(self.id)])
@@ -40,29 +40,29 @@ class File(models.Model):
         return self.id
 
 
-class Likes(models.Model):
+class Views (models.Model):
     user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='user_like')
+        User, on_delete=models.CASCADE, related_name='user_view')
     post = models.ForeignKey(
-        File, on_delete=models.CASCADE, related_name='post_like')
+        File, on_delete=models.CASCADE, related_name='post_view')
 
-    def user_liked_post(sender, instance, *args, **kwargs):
-        like = instance
-        post = like.post
-        sender = like.user
+    def user_viewed_post(sender, instance, *args, **kwargs):
+        view = instance
+        post = view.post
+        sender = view.user
         notify = Notification(post=post, sender=sender,
                               user=post.user, notification_type=1)
         notify.save()
 
-    def user_unlike_post(sender, instance, *args, **kwargs):
-        like = instance
-        post = like.post
-        sender = like.user
+    def user_unview_post(sender, instance, *args, **kwargs):
+        view = instance
+        post = view.post
+        sender = view.user
 
         notify = Notification.objects.filter(
             post=post, sender=sender, notification_type=1)
         notify.delete()
 
-# Likes
-post_save.connect(Likes.user_liked_post, sender=Likes)
-post_delete.connect(Likes.user_unlike_post, sender=Likes)
+# views
+post_save.connect(Views.user_viewed_post, sender=Views)
+post_delete.connect(Views.user_unview_post, sender=Views)
