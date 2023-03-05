@@ -76,27 +76,44 @@
   </nav>
   <!-- Navbar -->
 
-  {% for notification in notifications %}
-
+  <br>
+  <br>
   <div class="card text-center">
-    {% if notification.notification_type == 1 %}
 
-    <div class="card-body">
-      <h8 class="card-title">{{ notification.sender.username }}</h8>
-      <br>
-      <h8 class="card-title">{{ notification.sender.email }}</h8>
-      <br>
-      <span><i class="fa-solid fa-eye"></i>
-        <p> viewed the file</p>
-      </span>
-    </div>
-    <div class="card-footer text-muted">
-      {{ notification.date }}
-    </div>
-    {% endif %}
+
+    <table class="table">
+      <thead style="background-color: #4a6e64">
+        <tr style="color: black;">
+
+          <th scope="col">Student</th>
+          <th scope="col">Email</th>
+          <th scope="col">Unit Title</th>
+          <th scope="col">File</th>
+          <th scope="col">Date & Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for notification in notifications %}
+
+        {% if notification.notification_type == 1 %}
+        <tr>
+
+          <td>{{ notification.sender.username }}</td>
+          <td>{{ notification.sender.email }}</td>
+          <th scope="row">{{ notification.post.title }}</th>
+          <td>{{ notification.post.pdf }}</td>
+          <td>{{ notification.date }}</td>
+        </tr>
+        {% endif %}
+
+        {% endfor %}
+      </tbody>
+    </table>
+
+
   </div>
 
-  {% endfor %}
+
 
 
 </body>

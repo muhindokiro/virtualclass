@@ -71,7 +71,15 @@ def studentPage(request):
 @login_required(login_url="login")
 @allowed_users(allowed_roles=['lecturer'])
 def lecturerPage(request):
-    files = File.objects.all()
+    # files = File.objects.all()
+    files = File.objects.filter(user = request.user)
+
+
+    # context = {
+    #     'files': files,
+    # }
+
+    # print(context)
     return render(request, "lecturer.html", {'files': files})
 
 
@@ -121,12 +129,18 @@ def logoutUser(request):
     return redirect("login")
 
 
+def delete(request, post_id):
+    post = File.objects.get(id=post_id)
+    post.delete()
+    return HttpResponseRedirect(reverse('lecturer'))
+
 @login_required(login_url="login")
 @allowed_users(allowed_roles=['lecturer'])
 def upload_file(request):
     if request.method == 'POST':
         form =  FileForm(request.POST, request.FILES)
         if form.is_valid():
+            form.user = request.user
             form.save()
             
             return redirect('lecturer')

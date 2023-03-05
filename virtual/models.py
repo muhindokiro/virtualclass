@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 from notifications.models import Notification
 from django.db.models.signals import post_save
+from django import forms
 import uuid
 from django.urls import reverse
 from django.db.models.signals import post_save,  post_delete
@@ -25,12 +26,12 @@ class Profile(models.Model):
         return f' {self.user.username} Profile'
     
 class File(models.Model):
+
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    fullname = models.CharField(max_length=50)
     title = models.CharField(max_length=50)
     pdf = models.FileField(upload_to='files/pdfs/')
     date = models.DateTimeField(auto_now_add=True, null=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     likes = models.IntegerField(default=0)
 
     def get_absolute_url(self):

@@ -11,6 +11,7 @@ urlpatterns = [
     path("login/", views.loginPage, name="login"),
     path("logout/", views.logoutUser, name="logout"),
     path("student/", views.studentPage, name="student"),
+    path('<uuid:post_id>/delete', views.delete, name='delete'),
     path('<uuid:post_id>/like', views.like, name='postlike'),
     path('<uuid:post_id>', views.PostDetails, name='postdetails'),
     path("lecturer/", views.lecturerPage, name="lecturer"),
