@@ -250,7 +250,7 @@
             {% for file in files %}
             <form>
                 <tr>
-                    <td>{{ file.fullname }}</td>
+                    <td>{{ file.user }}</td>
                     <td>{{ file.title }}</td>
                     <td>{{ file.pdf }}</td>
                     <td><a href="{% url 'postview' file.id %}"><i class="fa-solid fa-eye"></i>{{ file.views }}</a></td>

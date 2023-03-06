@@ -24,8 +24,8 @@
         <div class="container-fluid">
             <!-- Toggle button -->
             <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <i class="fas fa-bars"></i>
-        </button>
+        <i class="fas fa-bars"></i>
+      </button>
 
             <!-- Collapsible wrapper -->
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -46,68 +46,50 @@
 
             <!-- Right elements -->
             <div class="d-flex align-items-center">
-                <span style="margin-right: 20px; color: white">{{ request.user }}</span
-          >
+                <span style="margin-right: 20px; color: white">{{ request.user }}</span>
 
-          <!-- Avatar -->
-          <div class="dropdown">
-            <a
-              class="dropdown-toggle d-flex align-items-center hidden-arrow"
-              href="#"
-              id="navbarDropdownMenuAvatar"
-              role="button"
-              data-mdb-toggle="dropdown"
-              aria-expanded="false"
-            >
-              <i class="fas fa-user-alt"></i>
-            </a>
-            <ul
-              class="dropdown-menu dropdown-menu-end"
-              aria-labelledby="navbarDropdownMenuAvatar"
-            >
-              <li>
-                <a class="dropdown-item" href="{% url 'profile' %}"
-                  >My profile</a
-                >
-              </li>
-              <li>
-                <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
-              </li>
-            </ul>
-          </div>
+                <!-- Avatar -->
+                <div class="dropdown">
+                    <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-user-alt"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+                        <li>
+                            <a class="dropdown-item" href="{% url 'profile' %}">My profile</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Right elements -->
         </div>
-        <!-- Right elements -->
-      </div>
-      <!-- Container wrapper -->
+        <!-- Container wrapper -->
     </nav>
     <!-- Navbar -->
 
     <br />
     <br />
     <div>
-      <div class="card text-center">
-        <div class="card-header">Upload File</div>
-        <div class="card-body">
-          <form method="post" action="" enctype="multipart/form-data">
-            {% csrf_token %} {{ form.as_p }}
-            <button type="submit" class="btn btn-primary">Upload File</button>
-          </form>
+        <div class="card text-center">
+            <div class="card-header">Upload File</div>
+            <div class="card-body">
+                <form method="post" action="" enctype="multipart/form-data">
+                    {% csrf_token %} {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary">Upload File</button>
+                </form>
+            </div>
+            <div class="card-footer text-muted"></div>
         </div>
-        <div class="card-footer text-muted"></div>
-      </div>
-    </div>
 
-    <section class="">
-      <!-- Footer -->
-      <footer
-        class="text-center text-white fixed-bottom"
-        style="background-color: #0a4275"
-      >
-        <!-- Copyright -->
-        <div class="text-center p-3" style="background-color: #4a6e64">
-          © 2022 Copyright:
-          <a class="text-white" href="https://mdbootstrap.com/"
-            >Virtual Class</a
+        <<<<<<< HEAD <section class="">
+            <!-- Footer -->
+            <footer class="text-center text-white fixed-bottom" style="background-color: #0a4275">
+                <!-- Copyright -->
+                <div class="text-center p-3" style="background-color: #4a6e64">
+                    © 2022 Copyright:
+                    <a class="text-white" href="https://mdbootstrap.com/">Virtual Class</a
           >
         </div>
         <!-- Copyright -->
@@ -120,4 +102,25 @@
     type="text/javascript "
     src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.0/mdb.min.js "
   ></script>
+=======
+  </div>
+
+  <section class="">
+    <!-- Footer -->
+    <footer class="text-center text-white fixed-bottom" style="background-color: #0a4275">
+      <!-- Copyright -->
+      <div class="text-center p-3" style="background-color: #4a6e64">
+        © 2022 Copyright:
+        <a class="text-white" href="https://mdbootstrap.com/">Virtual Class</a>
+                </div>
+                <!-- Copyright -->
+            </footer>
+            <!-- Footer -->
+            </section>
+</body>
+<!-- MDB -->
+<script type="text/javascript " src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.0/mdb.min.js "></script>
+
+>>>>>>> 0fdd3661ae96c104574121a2fabfcc1d659a667a
+
 </html>

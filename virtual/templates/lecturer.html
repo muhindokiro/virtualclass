@@ -83,12 +83,13 @@
                     <th>Course Title</th>
                     <th>Pdf</th>
                     <th>Download</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
                 {% for file in files %}
                 <tr>
-                    <td>{{ file.fullname }}</td>
+                    <td>{{ file.user.username }}</td>
                     <td>{{ file.title }}</td>
                     <td>{{ file.pdf }}</td>
                     <td>
@@ -96,6 +97,7 @@
               Download PDF
             </a>
                     </td>
+                    <td><a href="{% url 'delete' file.id %}"><i class="fas fa-trash-alt"></i></a></td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -103,9 +105,9 @@
         <!-- <a href="#" class="btn btn-primary">Button</a> -->
     </div>
 
-    <section class="">
+    <section class="container">
         <!-- Footer -->
-        <footer class="text-center text-white fixed-bottom" style="background-color: #0a4275">
+        <footer class="text-center text-white fixed-bottom" style="background-color: #0a4275; position: fixed;">
             <!-- Copyright -->
             <div class="text-center p-3" style="background-color: #4a6e64">
                 © 2022 Copyright:
