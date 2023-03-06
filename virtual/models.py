@@ -31,7 +31,7 @@ class File(models.Model):
     title = models.CharField(max_length=50)
     pdf = models.FileField(upload_to='files/pdfs/')
     date = models.DateTimeField(auto_now_add=True, null=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     likes = models.IntegerField(default=0)
 
     def get_absolute_url(self):

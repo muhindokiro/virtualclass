@@ -1,3 +1,4 @@
+# Create your views here.
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
@@ -12,13 +13,11 @@ from django.contrib.auth.decorators import login_required,permission_required
 from .decorators import allowed_users,admin_only
 from django.views.decorators import gzip
 from django.http import StreamingHttpResponse,HttpResponse
-from .models import File, Likes
+from .models import File, Likes, Profile
+from notifications.models import Notification
 import cv2
 import threading
-
-# Create your views here.
 from django.core.files.storage import FileSystemStorage
-from .models import File,Profile
 from .forms import CreateUserForm,FileForm,UpdateUserForm,ProfileUpdateForm
 
 from django.conf import settings
@@ -28,6 +27,8 @@ def home(request):
 
 @login_required(login_url="login")
 def userProfile(request):
+    notifications = Notification.objects.all()
+
     if request.method == 'POST':
         u_form = UpdateUserForm(request.POST, instance=request.user)
         p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
@@ -44,7 +45,8 @@ def userProfile(request):
     context = {
         'user': request.user,
         'u_form': u_form,
-        'p_form': p_form
+        'p_form': p_form,
+        'notifications': notifications
     }
     return render(request, "profile.html", context)
 
@@ -71,15 +73,12 @@ def studentPage(request):
 @login_required(login_url="login")
 @allowed_users(allowed_roles=['lecturer'])
 def lecturerPage(request):
-    # files = File.objects.all()
     files = File.objects.filter(user = request.user)
-
 
     # context = {
     #     'files': files,
     # }
 
-    # print(context)
     return render(request, "lecturer.html", {'files': files})
 
 
@@ -140,8 +139,9 @@ def upload_file(request):
     if request.method == 'POST':
         form =  FileForm(request.POST, request.FILES)
         if form.is_valid():
-            form.user = request.user
-            form.save()
+            new_file = form.save(commit=False)
+            new_file.user = request.user
+            new_file.save()
             
             return redirect('lecturer')
     else:
