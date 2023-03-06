@@ -3,5 +3,5 @@ from .models import *
 
 admin.site.register(File)
 admin.site.register(Profile)
-admin.site.register(Views)
+admin.site.register(View)
 

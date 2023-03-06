@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import login_required,permission_required
 from .decorators import allowed_users,admin_only
 from django.views.decorators import gzip
 from django.http import StreamingHttpResponse,HttpResponse
-from .models import File, Views, Profile
+from .models import File, View, Profile
 from notifications.models import Notification
 import cv2
 import threading
@@ -211,15 +211,15 @@ def view(request, post_id):
     user = request.user
     post = File.objects.get(id=post_id)
     current_views = post.views
-    viewed = Views.objects.filter(user=user, post=post).count()
+    viewed = View.objects.filter(user=user, post=post).count()
 
     if not viewed:
-        view = Views.objects.create(user=user, post=post)
+        view = View.objects.create(user=user, post=post)
         
         current_views = current_views + 1
 
     else:
-        Views.objects.filter(user=user, post=post).delete()
+        View.objects.filter(user=user, post=post).delete()
         current_views = current_views - 1
 
     post.views = current_views
