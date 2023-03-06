@@ -281,7 +281,7 @@
           <td>{{ file.user }}</td>
           <td>{{ file.title }}</td>
           <td>{{ file.pdf }}</td>
-          <td><a href="{% url 'postlike' file.id %}"><i class="fa-solid fa-eye"></i>{{ file.likes }}</a></td>
+          <td><a href="{% url 'postview' file.id %}"><i class="fa-solid fa-eye"></i>{{ file.views }}</a></td>
 
         </tr>
       </form>
