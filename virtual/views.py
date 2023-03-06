@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import login_required,permission_required
 from .decorators import allowed_users,admin_only
 from django.views.decorators import gzip
 from django.http import StreamingHttpResponse,HttpResponse
-from .models import File, Likes, Profile
+from .models import File, Views, Profile
 from notifications.models import Notification
 import cv2
 import threading
@@ -27,7 +27,7 @@ def home(request):
 
 @login_required(login_url="login")
 def userProfile(request):
-    notifications = Notification.objects.all()
+    notifications = Notification.objects.filter(user = request.user)
 
     if request.method == 'POST':
         u_form = UpdateUserForm(request.POST, instance=request.user)
@@ -175,25 +175,26 @@ def gen(camera):
 
 
 @login_required
-def like(request, post_id):
+def view(request, post_id):
     user = request.user
     post = File.objects.get(id=post_id)
-    current_likes = post.likes
-    liked = Likes.objects.filter(user=user, post=post).count()
+    current_views = post.views
+    viewed = Views.objects.filter(user=user, post=post).count()
 
-    if not liked:
-        like = Likes.objects.create(user=user, post=post)
-        # like.save()
-        current_likes = current_likes + 1
+    if not viewed:
+        view = Views.objects.create(user=user, post=post)
+        
+        current_views = current_views + 1
 
     else:
-        Likes.objects.filter(user=user, post=post).delete()
-        current_likes = current_likes - 1
+        Views.objects.filter(user=user, post=post).delete()
+        current_views = current_views - 1
 
-    post.likes = current_likes
+    post.views = current_views
     post.save()
 
     return HttpResponseRedirect(reverse('postdetails', args=[post_id]))
+
 
 @login_required
 def PostDetails(request, post_id):
