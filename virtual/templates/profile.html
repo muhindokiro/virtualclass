@@ -294,7 +294,10 @@
 
                     <th scope="row">{{ notification.post.title }}</th>
                     <td>{{ notification.post.pdf }}</td>
-                    <td>{{ notification.post.views }}</td>
+                    <td>
+                        <a href="{% url 'notifications'  %}"></i>{{ notification.post.views }}</a>
+                    </td>
+
                 </tr>
                 {% endif %} {% endfor %}
             </tbody>

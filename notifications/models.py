@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Notification(models.Model):
-    NOTIFICATION_TYPES = ((1, 'Like'), (2, 'Comment'), (3, 'Follow'))
+    NOTIFICATION_TYPES = ((1, 'Like'), )
 
     post = models.ForeignKey('virtual.File', on_delete=models.CASCADE,
                              related_name="noti_post", blank=True, null=True)

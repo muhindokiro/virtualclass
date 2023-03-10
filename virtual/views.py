@@ -233,7 +233,7 @@ def PostDetails(request, post_id):
     post = get_object_or_404(File, id=post_id)
     user = request.user
     profile = Profile.objects.get(user=user)
-    favorited = False
+    
 
     if request.user.is_authenticated:
         profile = Profile.objects.get(user=user)
