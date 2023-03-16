@@ -77,24 +77,12 @@ WSGI_APPLICATION = "virtualclass.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.mysql",
-#         "NAME": "virtual class",
-#         "USER": "root",
-#         "PASSWORD": "",
-#         "PORT": 3306,
-#         "HOST": "127.0.0.1",
-#         "OPTIONS":{
-#            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'" 
-#         }
-#     }
-# }
+
 DATABASES = {
-"default": {
-"ENGINE": "django.db.backends.sqlite3",
-"NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-}
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+    }
 } 
 
 
@@ -122,7 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Africa/Nairobi"
 
 USE_I18N = True
 
