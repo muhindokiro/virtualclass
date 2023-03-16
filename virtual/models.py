@@ -41,7 +41,7 @@ class File(models.Model):
         return self.id
 
 
-class Views(models.Model):
+class View(models.Model):
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='user_view')
     post = models.ForeignKey(
@@ -65,5 +65,5 @@ class Views(models.Model):
         notify.delete()
 
 # views
-post_save.connect(Views.user_viewed_post, sender=Views)
-post_delete.connect(Views.user_unview_post, sender=Views)
+post_save.connect(View.user_viewed_post, sender=View)
+post_delete.connect(View.user_unview_post, sender=View)

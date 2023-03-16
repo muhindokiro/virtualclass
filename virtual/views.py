@@ -5,7 +5,6 @@ from django.template import loader
 from django.urls import reverse
 from django.forms import inlineformset_factory
 from django.contrib.auth.forms import UserCreationForm
-from virtual.functions.functions import handle_uploaded_file
 from django.contrib.auth.models import Group
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -13,7 +12,7 @@ from django.contrib.auth.decorators import login_required,permission_required
 from .decorators import allowed_users,admin_only
 from django.views.decorators import gzip
 from django.http import StreamingHttpResponse,HttpResponse
-from .models import File, Views, Profile
+from .models import File, View, Profile
 from notifications.models import Notification
 import cv2
 import threading
@@ -24,6 +23,14 @@ from django.conf import settings
 
 def home(request):
     return render(request, "home.html")
+@gzip.gzip_page
+def cameraView(request):
+    try:
+        cam = VideoCamera()
+        return StreamingHttpResponse(gen(cam), content_type="multipart/x-mixed-replace;boundary=frame")
+    except:
+        pass
+    return render(request, "camera.html")    
 
 @login_required(login_url="login")
 def userProfile(request):
@@ -147,6 +154,31 @@ def upload_file(request):
     else:
         form = FileForm()
     return render(request, "upload.html", {'form': form})
+#to capture video class
+class VideoCamera(object):
+    def __init__(self):
+        self.video = cv2.VideoCapture(0)
+        (self.grabbed, self.frame) = self.video.read()
+        threading.Thread(target=self.update, args=()).start()
+
+    def __del__(self):
+        self.video.release()
+
+    def get_frame(self):
+        image = self.frame
+        _, jpeg = cv2.imencode('.jpg', image)
+        return jpeg.tobytes()
+
+    def update(self):
+        while True:
+            (self.grabbed, self.frame) = self.video.read()
+
+def gen(camera):
+    while True:
+        frame = camera.get_frame()
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+               
 
 #to capture video class
 class VideoCamera(object):
@@ -179,15 +211,15 @@ def view(request, post_id):
     user = request.user
     post = File.objects.get(id=post_id)
     current_views = post.views
-    viewed = Views.objects.filter(user=user, post=post).count()
+    viewed = View.objects.filter(user=user, post=post).count()
 
     if not viewed:
-        view = Views.objects.create(user=user, post=post)
+        view = View.objects.create(user=user, post=post)
         
         current_views = current_views + 1
 
     else:
-        Views.objects.filter(user=user, post=post).delete()
+        View.objects.filter(user=user, post=post).delete()
         current_views = current_views - 1
 
     post.views = current_views
@@ -201,7 +233,7 @@ def PostDetails(request, post_id):
     post = get_object_or_404(File, id=post_id)
     user = request.user
     profile = Profile.objects.get(user=user)
-    favorited = False
+    
 
     if request.user.is_authenticated:
         profile = Profile.objects.get(user=user)
