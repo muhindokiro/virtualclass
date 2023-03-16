@@ -51,20 +51,22 @@
                 <span style="margin-right: 20px; color: white ">Hello, {{ request.user }}</span>
 
                 <!-- Avatar -->
-                <div class="dropdown ">
-                    <a class="dropdown-toggle d-flex align-items-center hidden-arrow " href="# " id="navbarDropdownMenuAvatar " role="button " data-mdb-toggle="dropdown " aria-expanded="false ">
-                        <i class="fas fa-user-alt "></i>
+                <div class="dropdown">
+                    <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-user-alt"></i>
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-end " aria-labelledby="navbarDropdownMenuAvatar ">
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
                         <li>
-                            <a class="dropdown-item " href="{% url 'profile' %} ">My profile</a>
+                            <a class="dropdown-item" href="{% url 'profile' %}">My profile</a>
                         </li>
 
                         <li>
-                            <a class="dropdown-item " href="{% url 'logout' %} ">Logout</a>
+                            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
                         </li>
                     </ul>
+
                 </div>
+
             </div>
             <!-- Right elements -->
         </div>
